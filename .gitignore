@@ -1,2 +1,7 @@
-node_modules/
-.DS_Store
+# Only track statusline-related files
+*
+!.gitignore
+!statusline.sh
+!statusline.config.json
+!settings.json
+!README.md

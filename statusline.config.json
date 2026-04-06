@@ -1,0 +1,12 @@
+{
+  "colors": {
+    "accent": "#D94F70",
+    "success": "#88B04B",
+    "warning": "#F59E0B",
+    "caution": "#EAB308",
+    "error": "#E05252",
+    "muted": "#9CA3AF",
+    "text": "#DCDCDC",
+    "info": "#56B6C2"
+  }
+}
