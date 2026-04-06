@@ -1,0 +1,23 @@
+{
+  "name": "@grwthlab/statusline",
+  "version": "1.0.0",
+  "description": "grwthlab-branded statusline for Claude Code with project detection, extended git info, and system status",
+  "bin": {
+    "@grwthlab/statusline": "bin/install.js"
+  },
+  "files": [
+    "bin/"
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "statusline",
+    "grwthlab",
+    "developer-tools"
+  ],
+  "author": "grwthlab",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
