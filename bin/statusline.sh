@@ -8,7 +8,13 @@ if [ -z "$input" ]; then
     exit 0
 fi
 
-# ── grwthlab Colors ─────────────────────────────────────
+# ── Hex → ANSI converter ───────────────────────────────
+hex_to_ansi() {
+    local hex="${1#\#}"
+    printf '\033[38;2;%d;%d;%dm' "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}"
+}
+
+# ── grwthlab Default Colors ────────────────────────────
 purple='\033[38;2;139;92;246m'
 green='\033[38;2;34;197;94m'
 orange='\033[38;2;245;158;11m'
@@ -19,6 +25,26 @@ white='\033[38;2;220;220;220m'
 cyan='\033[38;2;86;182;194m'
 dim='\033[2m'
 reset='\033[0m'
+
+# ── Load custom colors from config ─────────────────────
+config_file="$HOME/.claude/statusline.config.json"
+if [ -f "$config_file" ]; then
+    _cfg=$(jq -r '.colors // {} | to_entries[] | "\(.key) \(.value)"' "$config_file" 2>/dev/null)
+    while IFS=' ' read -r key val; do
+        [ -z "$key" ] || [ -z "$val" ] && continue
+        ansi=$(hex_to_ansi "$val")
+        case "$key" in
+            accent)  purple="$ansi" ;;
+            success) green="$ansi" ;;
+            warning) orange="$ansi" ;;
+            caution) yellow="$ansi" ;;
+            error)   red="$ansi" ;;
+            muted)   muted="$ansi" ;;
+            text)    white="$ansi" ;;
+            info)    cyan="$ansi" ;;
+        esac
+    done <<< "$_cfg"
+fi
 
 sep=" ${muted}│${reset} "
 

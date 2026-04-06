@@ -8,6 +8,20 @@ const CLAUDE_DIR = path.join(os.homedir(), ".claude");
 const SETTINGS_FILE = path.join(CLAUDE_DIR, "settings.json");
 const STATUSLINE_DEST = path.join(CLAUDE_DIR, "statusline.sh");
 const STATUSLINE_SRC = path.resolve(__dirname, "statusline.sh");
+const CONFIG_FILE = path.join(CLAUDE_DIR, "statusline.config.json");
+
+const DEFAULT_CONFIG = {
+  colors: {
+    accent: "#8B5CF6",
+    success: "#22C55E",
+    warning: "#F59E0B",
+    caution: "#EAB308",
+    error: "#E05252",
+    muted: "#9CA3AF",
+    text: "#DCDCDC",
+    info: "#56B6C2",
+  },
+};
 
 // grwthlab colors
 const purple = "\x1b[38;2;139;92;246m";
@@ -161,8 +175,17 @@ function run() {
     success(`Updated ${dim}settings.json${reset} with statusLine config`);
   }
 
+  // Create default config if it doesn't exist
+  if (!fs.existsSync(CONFIG_FILE)) {
+    fs.writeFileSync(CONFIG_FILE, JSON.stringify(DEFAULT_CONFIG, null, 2) + "\n");
+    success(`Created ${dim}statusline.config.json${reset} with default colors`);
+  } else {
+    success(`Config exists at ${dim}statusline.config.json${reset} — colors preserved`);
+  }
+
   console.log();
   log(`${green}Done!${reset} Restart Claude Code to see your ${purple}grwthlab${reset} status line.`);
+  log(`${dim}Edit ~/.claude/statusline.config.json to customize colors.${reset}`);
   console.log();
 }
 

@@ -51,16 +51,37 @@ npx @grwthlab/statusline
 npx @grwthlab/statusline --uninstall
 ```
 
-## Color Palette
+## Customization
 
-| Color  | Hex     | Usage              |
-|--------|---------|--------------------|
-| Purple | #8B5CF6 | Brand accent       |
-| Green  | #22C55E | 0-49% usage        |
-| Orange | #F59E0B | 50-69% usage       |
-| Yellow | #EAB308 | 70-89% usage       |
-| Red    | #E05252 | 90-100% usage      |
-| Gray   | #9CA3AF | Separators, dimmed |
+Colors are configurable via `~/.claude/statusline.config.json` (created automatically on install):
+
+```json
+{
+  "colors": {
+    "accent": "#8B5CF6",
+    "success": "#22C55E",
+    "warning": "#F59E0B",
+    "caution": "#EAB308",
+    "error": "#E05252",
+    "muted": "#9CA3AF",
+    "text": "#DCDCDC",
+    "info": "#56B6C2"
+  }
+}
+```
+
+All keys are optional — missing values fall back to the defaults above. Edit the file and restart Claude Code to apply changes.
+
+| Key       | Default | Usage                              |
+|-----------|---------|------------------------------------|
+| `accent`  | #8B5CF6 | Brand marker, effort high          |
+| `success` | #22C55E | 0-49% usage, running servers       |
+| `warning` | #F59E0B | 50-69% usage                       |
+| `caution` | #EAB308 | 70-89% usage                       |
+| `error`   | #E05252 | 90-100% usage, change count        |
+| `muted`   | #9CA3AF | Separators, dimmed text            |
+| `text`    | #DCDCDC | Model name, labels, reset times    |
+| `info`    | #56B6C2 | Git branch name                    |
 
 ## License
 
